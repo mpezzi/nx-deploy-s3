@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "ngx-deploy-starter-ng-add-schematic",
-  "title": "ngx-deploy-starter ng-add schematic",
+  "id": "nx-deploy-s3-ng-add-schematic",
+  "title": "nx-deploy-s3 ng-add schematic",
   "type": "object",
   "properties": {},
   "required": [],

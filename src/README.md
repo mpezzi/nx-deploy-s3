@@ -1,4 +1,4 @@
-# @angular-schule/ngx-deploy-starter
+# nx-deploy-s3
 
 **Deploy your Angular app to the file system directly from the Angular CLI! 🚀**
 
@@ -7,14 +7,14 @@
 > The actual "deployment" is only a simple copy to another folder in the file system.
 >
 > **Learn more at
-> https://github.com/angular-schule/ngx-deploy-starter**
+> https://github.com/mpezzi/nx-deploy-s3**
 
 ## Usage
 
-Add `@angular-schule/ngx-deploy-starter` to your project.
+Add `nx-deploy-s3` to your project.
 
 ```bash
-ng add @angular-schule/ngx-deploy-starter
+ng add nx-deploy-s3
 ```
 
 Deploy your project to the file system.
@@ -33,14 +33,14 @@ The following options are also available.
 - Default: `production` (string)
 - Example:
   - `ng deploy` – Angular project is build in production mode
-  - `ng deploy --configuration=test` – Angular project is using the configuration `test` (this configuration must exist in the `angular.json` file)
+  - `ng deploy --configuration=test` – Angular project is using the configuration `test` (this configuration must exist in the `workspace.json` file)
 
-A named build target, as specified in the `configurations` section of `angular.json`.
+A named build target, as specified in the `configurations` section of `workspace.json`.
 Each named target is accompanied by a configuration of option defaults for that target.
 Same as `ng build --configuration=XXX`.
 This command has no effect if the option `--no-build` option is active.
 
-> **This is a proposal from [RFC #1](https://github.com/angular-schule/ngx-deploy-starter/issues/1).**
+> **This is a proposal from [RFC #1](https://github.com/mpezzi/nx-deploy-s3/issues/1).**
 
 #### --no-build
 
@@ -54,7 +54,7 @@ Skip build process during deployment.
 This can be used when you are sure that you haven't changed anything and want to deploy with the latest artifact.
 This command causes the `--configuration` setting to have no effect.
 
-> **This is a proposal from [RFC #1](https://github.com/angular-schule/ngx-deploy-starter/issues/1).**
+> **This is a proposal from [RFC #1](https://github.com/mpezzi/nx-deploy-s3/issues/1).**
 
 #### --target-dir
 

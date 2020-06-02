@@ -8,12 +8,12 @@ import {
 function getWorkspace(
   host: Tree
 ): { path: string; workspace: experimental.workspace.WorkspaceSchema } {
-  const possibleFiles = ['/angular.json', '/.angular.json'];
+  const possibleFiles = ['/workspace.json', '/.workspace.json'];
   const path = possibleFiles.filter(path => host.exists(path))[0];
 
   const configBuffer = host.read(path);
   if (configBuffer === null) {
-    throw new SchematicsException(`Could not find angular.json`);
+    throw new SchematicsException(`Could not find workspace.json`);
   }
   const content = configBuffer.toString();
 
@@ -24,7 +24,9 @@ function getWorkspace(
       JsonParseMode.Loose
     ) as {}) as experimental.workspace.WorkspaceSchema;
   } catch (e) {
-    throw new SchematicsException(`Could not parse angular.json: ` + e.message);
+    throw new SchematicsException(
+      `Could not parse workspace.json: ` + e.message
+    );
   }
 
   return {
@@ -61,7 +63,7 @@ export const ngAdd = (options: NgAddOptions) => (
 
   if (project.projectType !== 'application') {
     throw new SchematicsException(
-      `Deploy requires an Angular project type of "application" in angular.json`
+      `Deploy requires an Angular project type of "application" in workspace.json`
     );
   }
 
@@ -72,12 +74,12 @@ export const ngAdd = (options: NgAddOptions) => (
     !project.architect.build.options.outputPath
   ) {
     throw new SchematicsException(
-      `Cannot read the output path (architect.build.options.outputPath) of the Angular project "${options.project}" in angular.json`
+      `Cannot read the output path (architect.build.options.outputPath) of the Angular project "${options.project}" in workspace.json`
     );
   }
 
   project.architect['deploy'] = {
-    builder: '@angular-schule/ngx-deploy-starter:deploy',
+    builder: 'nx-deploy-s3:deploy',
     options: {}
   };
 

@@ -13,7 +13,7 @@ describe('ng-add', () => {
 
     beforeEach(() => {
       tree = Tree.empty();
-      tree.create('angular.json', JSON.stringify(generateAngularJson()));
+      tree.create('workspace.json', JSON.stringify(generateAngularJson()));
     });
 
     it('generates new files if starting from scratch', async () => {
@@ -21,7 +21,7 @@ describe('ng-add', () => {
         project: PROJECT_NAME
       })(tree, {} as SchematicContext);
 
-      expect(result.read('angular.json')!.toString()).toEqual(
+      expect(result.read('workspace.json')!.toString()).toEqual(
         initialAngularJson
       );
     });
@@ -35,7 +35,7 @@ describe('ng-add', () => {
         project: OTHER_PROJECT_NAME
       })(tempTree, {} as SchematicContext);
 
-      const actual = result.read('angular.json')!.toString();
+      const actual = result.read('workspace.json')!.toString();
 
       expect(actual).toEqual(overwriteAngularJson);
     });
@@ -46,7 +46,7 @@ describe('ng-add', () => {
       const tree = Tree.empty();
       const angularJSON = generateAngularJson();
       delete angularJSON.defaultProject;
-      tree.create('angular.json', JSON.stringify(angularJSON));
+      tree.create('workspace.json', JSON.stringify(angularJSON));
 
       expect(() =>
         ngAdd({
@@ -57,28 +57,28 @@ describe('ng-add', () => {
       );
     });
 
-    it('Should throw if angular.json not found', async () => {
+    it('Should throw if workspace.json not found', async () => {
       expect(() =>
         ngAdd({
           project: PROJECT_NAME
         })(Tree.empty(), {} as SchematicContext)
-      ).toThrowError('Could not find angular.json');
+      ).toThrowError('Could not find workspace.json');
     });
 
-    it('Should throw if angular.json can not be parsed', async () => {
+    it('Should throw if workspace.json can not be parsed', async () => {
       const tree = Tree.empty();
-      tree.create('angular.json', 'hi');
+      tree.create('workspace.json', 'hi');
 
       expect(() =>
         ngAdd({
           project: PROJECT_NAME
         })(tree, {} as SchematicContext)
-      ).toThrowError('Could not parse angular.json');
+      ).toThrowError('Could not parse workspace.json');
     });
 
     it('Should throw if specified project does not exist ', async () => {
       const tree = Tree.empty();
-      tree.create('angular.json', JSON.stringify({ projects: {} }));
+      tree.create('workspace.json', JSON.stringify({ projects: {} }));
 
       expect(() =>
         ngAdd({
@@ -92,7 +92,7 @@ describe('ng-add', () => {
     it('Should throw if specified project is not application', async () => {
       const tree = Tree.empty();
       tree.create(
-        'angular.json',
+        'workspace.json',
         JSON.stringify({
           projects: { [PROJECT_NAME]: { projectType: 'pokemon' } }
         })
@@ -103,14 +103,14 @@ describe('ng-add', () => {
           project: PROJECT_NAME
         })(tree, {} as SchematicContext)
       ).toThrowError(
-        'Deploy requires an Angular project type of "application" in angular.json'
+        'Deploy requires an Angular project type of "application" in workspace.json'
       );
     });
 
     it('Should throw if app does not have architect configured', async () => {
       const tree = Tree.empty();
       tree.create(
-        'angular.json',
+        'workspace.json',
         JSON.stringify({
           projects: { [PROJECT_NAME]: { projectType: 'application' } }
         })
@@ -121,7 +121,7 @@ describe('ng-add', () => {
           project: PROJECT_NAME
         })(tree, {} as SchematicContext)
       ).toThrowError(
-        'Cannot read the output path (architect.build.options.outputPath) of the Angular project "pie-ka-chu" in angular.json'
+        'Cannot read the output path (architect.build.options.outputPath) of the Angular project "pie-ka-chu" in workspace.json'
       );
     });
   });
@@ -170,7 +170,7 @@ const initialAngularJson = `{
           }
         },
         "deploy": {
-          "builder": "@angular-schule/ngx-deploy-starter:deploy",
+          "builder": "nx-deploy-s3:deploy",
           "options": {}
         }
       }
@@ -202,7 +202,7 @@ const overwriteAngularJson = `{
           }
         },
         "deploy": {
-          "builder": "@angular-schule/ngx-deploy-starter:deploy",
+          "builder": "nx-deploy-s3:deploy",
           "options": {}
         }
       }
@@ -217,7 +217,7 @@ const overwriteAngularJson = `{
           }
         },
         "deploy": {
-          "builder": "@angular-schule/ngx-deploy-starter:deploy",
+          "builder": "nx-deploy-s3:deploy",
           "options": {}
         }
       }

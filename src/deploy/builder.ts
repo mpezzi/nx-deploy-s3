@@ -24,7 +24,7 @@ export default createBuilder<any>(
         new NodeJsSyncHost()
       );
       await workspace
-        .loadWorkspaceFromHost(normalize('angular.json'))
+        .loadWorkspaceFromHost(normalize('workspace.json'))
         .toPromise();
 
       if (!context.target) {
