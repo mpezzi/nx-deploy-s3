@@ -11,7 +11,7 @@ export async function run(
     const util = require('util');
     const exec = util.promisify(require('child_process').exec);
 
-    const bucketPath: string = options.subFolder ? options.subFolder : '';
+    const bucketPath: string = options.subFolder ? `/${options.subFolder}` : '';
     const { stdout } = await exec(
       `aws s3 sync --acl public-read --delete ${dir} s3://${options.bucket}${bucketPath} --region ${options.region}`
     );
