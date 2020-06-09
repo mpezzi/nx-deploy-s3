@@ -30,7 +30,7 @@
       "type": "string",
       "description": "AWS bucket to be used."
     },
-    "subFolder": {
+    "outputDir": {
       "type": "string",
       "description": "AWS bucket output directory."
     }
