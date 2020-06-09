@@ -21,6 +21,18 @@
     "targetDir": {
       "type": "string",
       "description": "This is one of the options you can freely choose according to your needs. --- We will 'deploy' to this folder."
+    },
+    "region": {
+      "type": "string",
+      "description": "AWS Region for deployment."
+    },
+    "bucket": {
+      "type": "string",
+      "description": "AWS bucket to be used."
+    },
+    "outputDir": {
+      "type": "string",
+      "description": "AWS bucket output directory."
     }
   }
 }
