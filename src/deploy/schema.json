@@ -32,7 +32,7 @@
     },
     "subFolder": {
       "type": "string",
-      "description": "Subfolder from AWS bucket."
+      "description": "AWS bucket output directory."
     }
   }
 }
